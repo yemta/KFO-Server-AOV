@@ -172,6 +172,7 @@ def ooc_cmd_jukebox(client, arg):
         client.send_ooc(f"The jukebox has the following songs in it:{message}")
 
 
+@mod_only(area_owners=True)
 def ooc_cmd_play(client, arg):
     """
     Play a track and loop it. See /play_once for this command without looping.
@@ -183,6 +184,7 @@ def ooc_cmd_play(client, arg):
                         True)  # looped change music
 
 
+@mod_only(area_owners=True)
 def ooc_cmd_play_once(client, arg):
     """
     Play a track without looping it. See /play for this command with looping.
@@ -256,6 +258,7 @@ def ooc_cmd_musiclists(client, arg):
     client.send_ooc(text)
 
 
+@mod_only(area_owners=True)
 def ooc_cmd_musiclist(client, arg):
     """
     Load a client-side music list. Pass no arguments to reset. /musiclists to see available lists.
@@ -299,7 +302,7 @@ def ooc_cmd_area_musiclist(client, arg):
         client.send_ooc("File not found!")
 
 
-@mod_only(hub_owners=True)
+@mod_only()
 def ooc_cmd_hub_musiclist(client, arg):
     """
     Load a hub-wide music list. Pass no arguments to reset. /musiclists to see available lists.

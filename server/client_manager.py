@@ -111,14 +111,14 @@ class ClientManager:
             # movement system stuff
             self.last_move_time = 0
             # If true, /getarea is called automatically when moving into a new area
-            self.autogetarea = True
+            self.autogetarea = False
 
             # client status stuff
             self._showname = ""
             self.blinded = False
             self._hidden = False
             self.hidden_in = None
-            self.sneaking = False
+            self.sneaking = True
             self.listen_pos = None
             self.following = None
             self.forced_to_follow = False

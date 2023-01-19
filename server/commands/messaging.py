@@ -103,7 +103,6 @@ def ooc_cmd_toggleglobal(client, arg):
     client.send_ooc(f"Global chat turned {glob_stat}.")
 
 
-@mod_only(area_owners=True)
 def ooc_cmd_need(client, arg):
     """
     Broadcast a server-wide advertisement for your role-play or case.

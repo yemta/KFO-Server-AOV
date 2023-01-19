@@ -19,8 +19,8 @@ __all__ = [
     "ooc_cmd_area_kick",
     "ooc_cmd_pos_lock",
     "ooc_cmd_pos_lock_clear",
-    "ooc_cmd_knock",
-    "ooc_cmd_peek",
+    #"ooc_cmd_knock",
+    #"ooc_cmd_peek",
     "ooc_cmd_max_players",
     "ooc_cmd_desc",
     "ooc_cmd_edit_ambience",
@@ -293,7 +293,7 @@ def ooc_cmd_uninvite(client, arg):
         client.send_ooc("No targets found.")
 
 
-@mod_only(area_owners=True)
+@mod_only()
 def ooc_cmd_area_kick(client, arg):
     """
     Remove a user from the current area and move them to another area.
@@ -408,6 +408,7 @@ def ooc_cmd_shuffle_pos(client, arg):
     client.area.broadcast_ooc("Position lock cleared.")
 
 
+@mod_only(area_owners=True)
 def ooc_cmd_pos_lock(client, arg):
     """
     Lock current area's available positions into a list of pos separated by space or comma.
@@ -628,7 +629,7 @@ def ooc_cmd_peek(client, arg):
         raise
 
 
-@mod_only(area_owners=True)
+@mod_only()
 def ooc_cmd_max_players(client, arg):
     """
     Set a max amount of players for current area between -1 and 99.

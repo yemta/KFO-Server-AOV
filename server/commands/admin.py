@@ -358,6 +358,7 @@ def ooc_cmd_mods(client, arg):
     client.send_areas_clients(mods=True)
 
 
+@mod_only()
 def ooc_cmd_unmod(client, arg):
     """
     Log out as a moderator.

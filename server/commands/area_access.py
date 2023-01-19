@@ -82,7 +82,7 @@ def ooc_cmd_area_lock(client, arg):
         raise
 
 
-@mod_only(area_owners=True)
+@mod_only()
 def ooc_cmd_area_mute(client, arg):
     """
     Makes this area impossible to speak for normal users unlesss /invite is used.
@@ -120,7 +120,7 @@ def ooc_cmd_area_mute(client, arg):
         raise
 
 
-@mod_only(area_owners=True)
+@mod_only()
 def ooc_cmd_area_unmute(client, arg):
     """
     Undo the effects of /area_mute.

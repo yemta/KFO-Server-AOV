@@ -19,7 +19,7 @@ __all__ = [
     #"ooc_cmd_list_hubs",
     #"ooc_cmd_clear_hub",
     #"ooc_cmd_rename_hub",
-    # Area Creation system
+    # Area Creation system - Might be cool
     "ooc_cmd_area_create",
     "ooc_cmd_area_remove",
     "ooc_cmd_area_rename",
@@ -831,6 +831,7 @@ def ooc_cmd_unfollow(client, arg):
         ooc_cmd_unfollow(client, "")
 
 
+@mod_only()
 def ooc_cmd_info(client, arg):
     """
     Check the information for the current Hub, or set it.
@@ -849,6 +850,7 @@ def ooc_cmd_info(client, arg):
         database.log_area("info.change", client, client.area, message=arg)
 
 
+@mod_only()
 def ooc_cmd_gm(client, arg):
     """
     Add a game master for the current Hub.

@@ -322,7 +322,7 @@ def ooc_cmd_reload(client, arg):
     client.send_ooc("Character reloaded.")
 
 
-@mod_only(hub_owners=True)
+@mod_only()
 def ooc_cmd_blind(client, arg):
     """
     Blind the targeted player(s) from being able to see or talk IC.
@@ -355,7 +355,7 @@ def ooc_cmd_blind(client, arg):
         raise ArgumentError("No targets found.")
 
 
-@mod_only(hub_owners=True)
+@mod_only()
 def ooc_cmd_unblind(client, arg):
     """
     Undo effects of the /blind command.
@@ -533,6 +533,8 @@ def ooc_cmd_unhide(client, arg):
     client.area.broadcast_area_list(client)
 
 
+#Sneaking set to True by default because no one cares when you move area
+@mod_only()
 def ooc_cmd_sneak(client, arg):
     """
     Begin sneaking a.k.a. hide your area moving messages from the OOC.
@@ -562,6 +564,7 @@ def ooc_cmd_sneak(client, arg):
                 f"Error encountered: {ex}. Use /sneak [id]")
 
 
+@mod_only()
 def ooc_cmd_unsneak(client, arg):
     """
     Stop sneaking a.k.a. show your area moving messages in the OOC.
@@ -591,12 +594,12 @@ def ooc_cmd_unsneak(client, arg):
                 f"Error encountered: {ex}. Use /unsneak [id]")
 
 
-@mod_only(area_owners=True)
+@mod_only()
 def force_sneak(client, arg):
     arg.sneak(True)
 
 
-@mod_only(area_owners=True)
+@mod_only()
 def force_unsneak(client, arg):
     arg.sneak(False)
 
@@ -635,7 +638,7 @@ def ooc_cmd_unlisten_pos(client, arg):
     )
 
 
-@mod_only(hub_owners=True)
+@mod_only()
 def ooc_cmd_save_character_data(client, arg):
     """
     Save the move_delay, keys, etc. for characters into a file in the storage/character_data/ folder.
@@ -654,7 +657,7 @@ def ooc_cmd_save_character_data(client, arg):
         raise
 
 
-@mod_only(hub_owners=True)
+@mod_only()
 def ooc_cmd_load_character_data(client, arg):
     """
     Load the move_delay, keys, etc. for characters from a file in the storage/character_data/ folder.
@@ -724,7 +727,7 @@ def mod_keys(client, arg, mod=0):
         raise
 
 
-@mod_only(hub_owners=True)
+@mod_only()
 def ooc_cmd_keys_set(client, arg):
     """
     Sets the keys of the target client/character folder/character id to the key(s). Keys must be a number like 5 or a link eg. 1-5.
@@ -736,7 +739,7 @@ def ooc_cmd_keys_set(client, arg):
     mod_keys(client, arg)
 
 
-@mod_only(hub_owners=True)
+@mod_only()
 def ooc_cmd_keys_add(client, arg):
     """
     Adds the keys of the target client/character folder/character id to the key(s). Keys must be a number like 5 or a link eg. 1-5.
@@ -748,7 +751,7 @@ def ooc_cmd_keys_add(client, arg):
     mod_keys(client, arg, 1)
 
 
-@mod_only(hub_owners=True)
+@mod_only()
 def ooc_cmd_keys_remove(client, arg):
     """
     Remvove the keys of the target client/character folder/character id from the key(s). Keys must be a number like 5 or a link eg. 1-5.
@@ -878,7 +881,7 @@ def ooc_cmd_chardesc_clear(client, arg):
     )
 
 
-@mod_only(hub_owners=True)
+@mod_only()
 def ooc_cmd_chardesc_set(client, arg):
     """
     Set someone else's character description to desc or clear it.
@@ -916,7 +919,7 @@ def ooc_cmd_chardesc_set(client, arg):
         raise ArgumentError("Target not found.")
 
 
-@mod_only(hub_owners=True)
+@mod_only()
 def ooc_cmd_chardesc_get(client, arg):
     """
     Get someone else's character description.
@@ -978,6 +981,7 @@ def ooc_cmd_narrate(client, arg):
     client.send_ooc(f"You will {stat}.")
 
 
+#???????????????????????????
 def ooc_cmd_blankpost(client, arg):
     """
     Use a blank image for your next emote (base/misc/blank.png, will be a missingno if you don't have it)
@@ -1079,7 +1083,7 @@ def ooc_cmd_charlists(client, arg):
     client.send_ooc(text)
 
 
-@mod_only(hub_owners=True)
+@mod_only()
 def ooc_cmd_charlist(client, arg):
     """
     Load a character list. /charlists to see available character lists.
