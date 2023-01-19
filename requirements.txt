@@ -1,0 +1,7 @@
+oyaml
+websockets
+arrow
+timeparse-plus
+geoip2
+discord
+pystun3
