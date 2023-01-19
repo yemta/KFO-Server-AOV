@@ -1,7 +1,6 @@
 ### Server related
 # Sensitive data
 config/
-config_sample/
 storage/**/*.json
 storage/**/*.yaml
 storage/db.sqlite*
