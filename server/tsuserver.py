@@ -444,7 +444,7 @@ class TsuServer3:
         self.send_all_cmd_pred(
             "CT",
             self.config["hostname"],
-            f"=== Advert ===\r\n{client.name} in {client.area.name} [{client.area.id}] (Hub {client.area.area_manager.id}) needs {msg}\r\n===============",
+            f"=== Advert ===\r\n{client.char_name} in {client.area.name} [{client.area.id}] needs {msg}\r\n===============",
             "1",
             pred=lambda x: not x.muted_adverts,
         )
