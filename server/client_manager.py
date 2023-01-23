@@ -243,7 +243,7 @@ class ClientManager:
             """Send the message of the day to the client."""
             motd = self.server.config["motd"]
             if motd != "":
-                self.send_ooc(f"📟MOTD📟\r\n{motd}\r\n")
+                self.send_ooc(f"MOTD\r\n{motd}\r\n")
 
         def send_hub_info(self):
             """Send the hub info to the client."""
@@ -794,7 +794,7 @@ class ClientManager:
             # Update our judge buttons
             self.area.update_judge_buttons(self)
             self.refresh_music()
-            msg = f"🚶Changed to area: {self.get_area_info(self.area.id)}"
+            msg = f"Changed area to {self.get_area_info(self.area.id)}"
             if self.area.desc != "" and not self.blinded:
                 desc = self.area.desc[:128]
                 if len(self.area.desc) > len(desc):

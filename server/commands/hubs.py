@@ -40,7 +40,7 @@ __all__ = [
     "ooc_cmd_force_follow",
     "ooc_cmd_follow",
     "ooc_cmd_unfollow",
-    "ooc_cmd_info",
+    #"ooc_cmd_info",
     "ooc_cmd_gm",
     "ooc_cmd_ungm",
     "ooc_cmd_broadcast",
