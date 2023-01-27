@@ -355,7 +355,11 @@ def ooc_cmd_mods(client, arg):
     Show a list of moderators online.
     Usage: /mods
     """
-    client.send_areas_clients(mods=True)
+    if client.is_mod:
+        client.send_areas_clients(mods=True)
+    else:
+        modcount = len([c for c in client.area.clients if c.is_mod])
+        client.send_ooc("There are {} mods online.".format(modcount))
 
 
 @mod_only()
