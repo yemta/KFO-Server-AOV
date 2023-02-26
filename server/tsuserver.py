@@ -104,6 +104,7 @@ class TsuServer3:
             self.load_music()
             self.load_backgrounds()
             self.load_ipranges()
+            self.load_gimps()
             self.hub_manager = HubManager(self)
         except yaml.YAMLError as exc:
             print("There was a syntax error parsing a configuration file:")
@@ -345,6 +346,14 @@ class TsuServer3:
         except Exception:
             logger.debug("Cannot find iprange_ban.txt")
 
+    def load_gimps(self):
+        """Load gimp list."""
+        try:
+            with open('config/gimp.yaml', 'r', encoding='utf-8') as gmp:
+                self.gimp_list = yaml.safe_load(gmp)
+        except Exception:
+            logger.debug("Cannot find gimp list.")
+
     def load_music_list(self):
         with open("config/music.yaml", "r", encoding="utf-8") as music:
             self.music_list = yaml.safe_load(music)
@@ -563,6 +572,7 @@ class TsuServer3:
         self.load_music()
         self.load_backgrounds()
         self.load_ipranges()
+        self.load_gimps()
 
         import server.commands
 
