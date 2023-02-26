@@ -251,6 +251,7 @@ class Area:
         self.cards = dict()
         self.votes = dict()
         self.password = ""
+        self.shadow_status = {}
 
         self.jukebox_votes = []
         self.jukebox_prev_char_id = -1

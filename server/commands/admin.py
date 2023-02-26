@@ -32,6 +32,7 @@ __all__ = [
     "ooc_cmd_whois",
     "ooc_cmd_restart",
     "ooc_cmd_myid",
+    "ooc_cmd_lastchar"
 ]
 
 
@@ -548,3 +549,24 @@ def ooc_cmd_myid(client, arg):
     if client.name != "":
         info += f": {client.name}"
     client.send_ooc(info)
+
+
+@mod_only()
+def ooc_cmd_lastchar(client, arg):
+    """
+    Prints the IPID and HDID of the last user on a character in the current area.
+    Usage: /lastchar <character folder>
+    """
+    if len(arg) == 0:
+        raise ArgumentError('You must specify a character name.')
+
+    try:
+        cid = client.area.area_manager.get_char_id_by_name(arg)
+    except ServerError:
+        raise
+    try:
+        ex = client.area.shadow_status[cid]
+    except KeyError:
+        client.send_ooc("Character hasn't been occupied in area since server start.")
+        return
+    client.send_ooc('Last person on {}: IPID: {}, HDID: {}.'.format(arg, ex[0], ex[1]))

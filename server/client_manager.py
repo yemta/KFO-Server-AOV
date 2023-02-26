@@ -327,6 +327,7 @@ class ClientManager:
                     1) and self.char_id != char_id
             self.char_id = char_id
             self.pos = ""
+            self.area.shadow_status[self.char_id] = [self.ipid, self.hdid]
             self.send_command("PV", self.id, "CID", self.char_id)
             # Commented out due to potentially causing clientside lag...
             # self.area.send_command('CharsCheck',
@@ -782,6 +783,9 @@ class ClientManager:
             self.send_command("HP", 1, self.area.hp_def)
             # Get prosecution HP bar
             self.send_command("HP", 2, self.area.hp_pro)
+
+            # Update Lastchar Information
+            self.area.shadow_status[self.char_id] = [self.ipid, self.hdid]
 
             # Send the background information
             if self.area.dark:
