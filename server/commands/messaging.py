@@ -113,6 +113,7 @@ def ooc_cmd_need(client, arg):
     if len(arg) == 0:
         raise ArgumentError("You must specify what you need.")
     client.server.broadcast_need(client, arg)
+    client.server.webhooks.advert(client.char_name, client.area, msg=arg)
     database.log_area("chat.announce.need", client, client.area, message=arg)
 
 

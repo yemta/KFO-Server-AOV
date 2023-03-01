@@ -2,6 +2,7 @@ from time import gmtime, strftime
 
 import requests
 import json
+import random
 
 from server import database
 
@@ -77,7 +78,7 @@ class Webhooks:
                 s = "s"
             message = f"New modcall received ({mods} moderator{s} online)"
 
-        description = f"[{current_time} UTC] {char} ({ipid}) in hub [{area.area_manager.id}] {area.area_manager.name} [{area.id}] {area.name} {'without reason (using <2.6?)' if reason is None else f'with reason: {reason}'}"
+        description = f"[{current_time} UTC] {char} ({ipid}) in [{area.id}] {area.name} {'without reason (using <2.6?)' if reason is None else f'with reason: {reason}'}"
 
         self.send_webhook(
             username=username,
@@ -86,6 +87,49 @@ class Webhooks:
             embed=True,
             title="Modcall",
             description=description,
+        )
+    
+    def advert(self, char, area, msg=None):
+        is_enabled = self.server.config["advert_webhook"]["enabled"]
+        username = self.server.config["advert_webhook"]["username"]
+        avatar_url = self.server.config["advert_webhook"]["avatar_url"]
+
+        if not is_enabled:
+            return
+        
+        title_list = ["A Case Is Being Advertised!", 
+                    "Can't Escape From Casing Fate!",
+                    "[CASE?]",
+                    "Babe wake up new case just dropped."]
+
+        roles = {
+            "def": "<@&1080312713181409400>",
+            "defense": "<@&1080312713181409400>",
+            "pro": "<@&1080312912603779122>",
+            "prosecution": "<@&1080312912603779122>"
+        }
+        pings = []
+        check = msg.lower()
+        if "all" in check:
+            pings = "<@&1080312713181409400>", "<@&1080312912603779122>"
+        else:
+            for x in check.split():
+                if x in roles and roles[x] not in pings:
+                    pings.append(roles[x])
+
+        message = f"{random.choice(title_list)}\n"
+        message += "".join(pings)
+
+        description = f"{char} in {area.name} {'needs people for a case!' if msg is None else f'needs {msg}'}"
+
+        self.send_webhook(
+            username=username,
+            avatar_url=avatar_url,
+            message=message,
+            embed=True,
+            title="Case Advert",
+            description=description,
+            url="https://discord.com/api/webhooks/1080303978014838874/VnN4ugDZJy78Wrl6Nh6XiwjDIG7fGk7ip9qF-dbSdQ4OWCDB5kWR2bK3yHNJ5svRLo6U"
         )
 
     def kick(self, ipid, reason="", client=None, char=None):

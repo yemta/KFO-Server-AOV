@@ -92,13 +92,13 @@ max_chars_ic: 256
 
 # Set up a Discord Bridge bot that keeps track of user messages on both ends (AO2 and Discord).
 bridgebot:
-  enabled: false # Whether or not this bot is enabled
-  token: string1234 # Discord Token for the bot
-  channel: ao2-lobby # channel to set up a bridge with
-  character: Ponco # character folder for Bridgebot to use
+  enabled: true # Whether or not this bot is enabled
+  token: # Discord Token for the bot
+  channel: bot-test # channel to set up a bridge with
+  character: Adrian # character folder for Bridgebot to use
   emote: normal # idle emote for Bridgebot to use
   pos: jur # position Bridgebot will use when talking
-  base_url: http://www.example.com/base/ # base folder URL to seek for bridgebot to obtain stuff like character avatar graphics etc.
+  base_url: https://s3.wasabisys.com/WebAO/base/ # base folder URL to seek for bridgebot to obtain stuff like character avatar graphics etc.
   embed_emotes: False # whether or not to embed emotes into the message (only supports .png atm)
   hub_id: 0 # numeric Hub ID where Bridgebot will reside
   area_id: 0 # numeric Area ID where Bridgebot will talk
@@ -107,7 +107,7 @@ bridgebot:
 
 # Whether or not Discord webhooks are enabled, and if they are, the webhook URL to use.
 # If webhooks_enabled is set to false, no webhooks will function regardless of whether they are enabled or not.
-webhooks_enabled: false
+webhooks_enabled: true
 webhook_url: example.com
 
 # Settings for the modcall webhook. Leaving a setting blank will use its default behavior.
@@ -116,12 +116,17 @@ modcall_webhook:
   username: Modcall # the username the webhook will use
   avatar_url: # url of a custom avatar image, leave blank to use the avatar the webhook was set up with
   ping_on_no_mods: false # whether or not to ping mods if a modcall is received while no moderators are online
-  mod_role_id: # the role ID of the role you want pinged. leave blank to use @here instead
+  mod_role_id: mods # the role ID of the role you want pinged. leave blank to use @here instead
+  
+advert_webhook:
+  enabled: true
+  username: CASE ADVERT # the username the webhook will use
+  avatar_url: # url of a custom avatar image, leave blank to use the avatar the webhook was set up with
 
 kick_webhook:
   enabled: true
   username: Kick
-  avatar_url:
+  avatar_url: https://static.wikia.nocookie.net/simpsons/images/4/43/Australia.png
 
 ban_webhook: # fires on both regular and HDID bans
   enabled: true
