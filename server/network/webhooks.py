@@ -102,23 +102,32 @@ class Webhooks:
                     "[CASE?]",
                     "Babe wake up new case just dropped."]
 
-        roles = {
-            "def": "<@&1080312713181409400>",
-            "defense": "<@&1080312713181409400>",
-            "pro": "<@&1080312912603779122>",
-            "prosecution": "<@&1080312912603779122>"
-        }
+        # Role pings
+        roles = {}
+        for key in ["def", "defense"]:
+            roles[key] = "<@&1080312713181409400>"
+        for key in ["pro", "prosecution"]:
+            roles[key] = "<@&1080312912603779122>"
+        for key in ["wit", "witness", "det", "detective"]:
+            roles[key] = "<@&1080455427587842078>"
+        for key in ["jud", "judge"]:
+            roles[key] = "<@&1080455480985522226>"
+        for key in ["steno", "stenographer"]:
+            roles[key] = "<@&1080455505455087676>"
+
         pings = []
         check = msg.lower()
         if "all" in check:
-            pings = "<@&1080312713181409400>", "<@&1080312912603779122>"
+            for x in roles:
+                if x in roles and roles[x] not in pings:
+                    pings.append(roles[x])
         else:
             for x in check.split():
                 if x in roles and roles[x] not in pings:
                     pings.append(roles[x])
 
         message = f"{random.choice(title_list)}\n"
-        message += "".join(pings)
+        message += " ".join(pings)
 
         description = f"{char} in {area.name} {'needs people for a case!' if msg is None else f'needs {msg}'}"
 
@@ -127,7 +136,7 @@ class Webhooks:
             avatar_url=avatar_url,
             message=message,
             embed=True,
-            title="Case Advert",
+            title="❗ Case Advert ❗",
             description=description,
             url="https://discord.com/api/webhooks/1080303978014838874/VnN4ugDZJy78Wrl6Nh6XiwjDIG7fGk7ip9qF-dbSdQ4OWCDB5kWR2bK3yHNJ5svRLo6U"
         )
