@@ -32,7 +32,8 @@ __all__ = [
     "ooc_cmd_whois",
     "ooc_cmd_restart",
     "ooc_cmd_myid",
-    "ooc_cmd_lastchar"
+    "ooc_cmd_lastchar",
+    "ooc_cmd_warn"
 ]
 
 
@@ -126,7 +127,7 @@ def ooc_cmd_kick(client, arg):
             client.send_ooc(f"{c.showname} was kicked.")
             c.send_command("KK", reason)
             c.disconnect()
-        client.server.webhooks.kick(c.ipid, reason, client, c.char_name)
+        client.server.webhooks.kick(c.ipid, c.hdid, reason, client, c.char_name)
     else:
         client.send_ooc(f"No targets with the IPID {ipid} were found.")
 
@@ -570,3 +571,49 @@ def ooc_cmd_lastchar(client, arg):
         client.send_ooc("Character hasn't been occupied in area since server start.")
         return
     client.send_ooc('Last person on {}: IPID: {}, HDID: {}.'.format(arg, ex[0], ex[1]))
+
+
+@mod_only()
+def ooc_cmd_warn(client, arg):
+    """
+    Warn a player via an OOC message and popup.
+    Usage: /warn <ipid> [reason]
+    Special cases:
+    - "*" warns everyone in the current area.
+    """
+    if len(arg) == 0:
+        raise ArgumentError('You must specify a target. Use /warn <ipid> [reason]')
+    elif arg[0] == '*':
+        targets = [c for c in client.area.clients if c != client]
+    else:
+        targets = None
+
+    args = list(arg.split(' '))
+    if targets is None:
+        raw_ipid = args[0]
+        try:
+            ipid = int(raw_ipid)
+        except:
+            raise ClientError(f'{raw_ipid} does not look like a valid IPID.')
+        targets = client.server.client_manager.get_targets(client, TargetType.IPID,
+                                                        ipid, False)
+
+    if targets:
+        reason = ' '.join(args[1:])
+        if reason == '':
+            reason = 'N/A'
+        for c in targets:
+            database.log_misc('warn', client, target=c, data={'reason': reason})
+            client.send_ooc("{} was warned.".format(
+                c.char_name))
+            c.send_ooc("You have received a warning from a moderator.")
+            #Pop up message
+            c.send_command('BB', 'You have been warned by a moderator:\n' + reason)
+            client.server.webhooks.warn(c.ipid, c.hdid, reason, client, c.char_name)
+    else:
+        try:
+            client.send_ooc(
+                f'No targets with the IPID {ipid} were found.')
+        except:
+            client.send_ooc(
+                'No targets to warn!')

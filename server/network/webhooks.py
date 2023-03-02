@@ -141,7 +141,7 @@ class Webhooks:
             url="https://discord.com/api/webhooks/1080303978014838874/VnN4ugDZJy78Wrl6Nh6XiwjDIG7fGk7ip9qF-dbSdQ4OWCDB5kWR2bK3yHNJ5svRLo6U"
         )
 
-    def kick(self, ipid, reason="", client=None, char=None):
+    def kick(self, ipid, hdid, reason="", client=None, char=None):
         is_enabled = self.server.config["kick_webhook"]["enabled"]
         username = self.server.config["kick_webhook"]["username"]
         avatar_url = self.server.config["kick_webhook"]["avatar_url"]
@@ -149,7 +149,7 @@ class Webhooks:
         if not is_enabled:
             return
 
-        message = f"{char} ({ipid})" if char is not None else str(ipid)
+        message = f"{char} (IPID: {ipid}, HDID: {hdid})" if char is not None else str(ipid)
         message += " was kicked"
         message += (
             f" by {client.name} ({client.ipid})"
@@ -178,12 +178,13 @@ class Webhooks:
         is_enabled = self.server.config["ban_webhook"]["enabled"]
         username = self.server.config["ban_webhook"]["username"]
         avatar_url = self.server.config["ban_webhook"]["avatar_url"]
+        unban_date = strftime("%Y-%m-%d %H:%M:%S %Z")
 
         if not is_enabled:
             return
-        message = f"{char} ({ipid})" if char is not None else str(ipid)
+        message = f"{char} (IPID: {ipid}, HDID: {hdid})" if char is not None else str(ipid)
         message += (
-            f" (hdid: {hdid}) was hardware-banned"
+            f" was hardware-banned"
             if hdid is not None
             else " was banned"
         )
@@ -193,11 +194,11 @@ class Webhooks:
             else " from the server"
         )
         message += f" with reason: {reason}" if reason.strip() != "" else ""
-        message += f" (Ban ID: {ban_id})."
+        message += f" (Ban ID: {ban_id}).\n"
         message += (
-            f" It will expire {unban_date}"
+            f"It will expire {unban_date}"
             if unban_date is not None
-            else " It is a permanent ban."
+            else "It is a permanent ban."
         )
 
         self.send_webhook(username=username,
@@ -216,6 +217,31 @@ class Webhooks:
             f" by {client.name} ({client.ipid})."
             if client is not None
             else " by the server."
+        )
+
+        self.send_webhook(username=username,
+                          avatar_url=avatar_url, message=message)
+        
+    
+    def warn(self, ipid, hdid, reason="", client=None, char=None):
+        is_enabled = self.server.config["warn_webhook"]["enabled"]
+        username = self.server.config["warn_webhook"]["username"]
+        avatar_url = self.server.config["warn_webhook"]["avatar_url"]
+
+        if not is_enabled:
+            return
+
+        message = f"{char} (IPID: {ipid}, HDID: {hdid})" if char is not None else str(ipid)
+        message += " was warned"
+        message += (
+            f" by {client.name} ({client.ipid})"
+            if client is not None
+            else " from the server"
+        )
+        message += (
+            f" with reason: {reason}"
+            if reason.strip() != ""
+            else " (no reason provided)."
         )
 
         self.send_webhook(username=username,
