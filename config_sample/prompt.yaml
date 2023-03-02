@@ -1,0 +1,154 @@
+murder:
+    - It's a ?{method} case, but ?{twist|1-5}
+    - It's a murder taking place at ?{location}, but also ?{twist|1-5}
+    
+asspull:
+    - ?{twist}!
+    - You thought that ?{twist}, but really ?{twist}!
+    - The ?{cast|2} are actually ?{relationship}!
+    - The real scene of the crime was actually ?{location}!
+    - The true murder method was actually ?{method}!
+    
+method:
+    - stabbing by ?{point}
+    - cutting by ?{blade}
+    - shot with ?{gun}
+    - bludgeoning by ?{bludgeon}
+
+twist:
+    - the ?{cast|2} are ?{relationship|1-2}
+    - the ?{cast} is secretly a ?{occupation}
+    - the ?{cast} is a ?{occupation}
+    - there's another victim
+    - the murder takes place in a "locked room"
+    - the murder takes place in an open space
+    - the murder happened in front of a crowd
+    - the body has a strange wound
+    - there's no signs of a struggle
+    - there's signs of a struggle
+    - it's VERY anime
+    - it's VERY serious
+    - murder method could be ?{method}
+    - it takes place at ?{location}
+    - there's also ?{weapon|1-2} on the scene
+    - there's ?{weapon} from ?{location} at the scene
+    - the crime scene is nearby ?{location}
+    - the murder weapon can't be found
+    - the body was moved to ?{location}
+    - a special event was happening around the time
+
+occupation:
+    - student
+    - teacher
+    - doctor
+    - lawyer
+    - cop
+    - hobo
+    - detective
+    - CEO
+    - gamer
+    - artist
+    - magician
+    - assassin
+    - astronaut
+    - judge
+    - bodyguard
+    - boxer
+    - businessman
+    - chef
+    - con artist
+    - rakugo performer
+    - flight attendant
+    - scientist
+    - security guard
+    - musician
+    - maid/butler
+    - spirit medium
+    - prince
+    - clown
+    - gambler
+    - bartender
+    - accountant
+    - programmer
+    - debt collector
+
+relationship:
+    - lovers
+    - family members
+    - best friends
+    - enemies
+    - co-workers
+    - rivals
+    - strangers
+
+cast:
+    - victim
+    - defendant
+    - defense
+    - prosecution
+    - detective
+    - first witness
+    - second witness
+    - judge
+
+location:
+    - a fast food restaurant
+    - a lake
+    - a forest
+    - a city park
+    - an arcade
+    - the courthouse
+    - a cruise ship
+    - the ?{cast}'s house
+    - a prison
+    - a concert hall
+    - a talent agency
+    - a hotel
+    - a ?{occupation} convention
+    - a filming studio
+    - a public beach
+    - a circus
+    - a bridge
+    - a haunted house
+
+weapon:
+    - ?{point}
+    - ?{blade}
+    - ?{bludgeon}
+    - ?{gun}
+
+point:
+    - a dagger
+    - a rapier
+    - a spear
+    - a sword
+    - a harpoon
+
+blade:
+    - a sword
+    - a katana
+    - an axe
+    - a broken bottle
+
+bludgeon:
+    - a rock
+    - a bat
+    - bare fists
+    - a morningstar
+    - a statue
+    - a lamp
+    - a jar
+    - a ball
+    - a dumbbell
+    - a golf club
+    - a hard hat
+    - a bottle
+
+gun:
+    - a pistol
+    - a shotgun
+    - a revolver
+    - an assault rifle
+    - a sniper rifle
+    - a cannon
+    - a laser beam

@@ -97,10 +97,7 @@ class Webhooks:
         if not is_enabled:
             return
         
-        title_list = ["A Case Is Being Advertised!", 
-                    "Can't Escape From Casing Fate!",
-                    "[CASE?]",
-                    "Babe wake up new case just dropped."]
+        title_list = self.server.misc_data['advert_titles']
 
         # Role pings
         roles = {}
@@ -138,7 +135,7 @@ class Webhooks:
             embed=True,
             title="❗ Case Advert ❗",
             description=description,
-            url="https://discord.com/api/webhooks/1080303978014838874/VnN4ugDZJy78Wrl6Nh6XiwjDIG7fGk7ip9qF-dbSdQ4OWCDB5kWR2bK3yHNJ5svRLo6U"
+            url=self.server.config["advert_url"]
         )
 
     def kick(self, ipid, hdid, reason="", client=None, char=None):

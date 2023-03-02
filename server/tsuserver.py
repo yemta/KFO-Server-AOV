@@ -105,6 +105,8 @@ class TsuServer3:
             self.load_backgrounds()
             self.load_ipranges()
             self.load_gimps()
+            self.load_miscdata()
+            self.save_miscdata()
             self.hub_manager = HubManager(self)
         except yaml.YAMLError as exc:
             print("There was a syntax error parsing a configuration file:")
@@ -354,6 +356,19 @@ class TsuServer3:
         except Exception:
             logger.debug("Cannot find gimp list.")
 
+    def load_miscdata(self):
+        """Load misc data list for links etc."""
+        try:
+            with open('config/miscdata.yaml', 'r', encoding='utf-8') as miscdata:
+                self.misc_data = yaml.safe_load(miscdata)
+        except Exception:
+            logger.debug("Cannot find data file.")
+
+    def save_miscdata(self):
+        """Save misc data to file."""
+        with open('config/miscdata.yaml', 'w') as miscdata:
+            yaml.dump(self.misc_data, miscdata, indent=4)
+
     def load_music_list(self):
         with open("config/music.yaml", "r", encoding="utf-8") as music:
             self.music_list = yaml.safe_load(music)
@@ -533,6 +548,8 @@ class TsuServer3:
          - Backgrounds
          - Commands
          - Banlists
+         - Gimp list
+         - Misc Data
         """
         with open("config/config.yaml", "r") as cfg:
             cfg_yaml = yaml.safe_load(cfg)
@@ -573,6 +590,7 @@ class TsuServer3:
         self.load_backgrounds()
         self.load_ipranges()
         self.load_gimps()
+        self.load_miscdata()
 
         import server.commands
 

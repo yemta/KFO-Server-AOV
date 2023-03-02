@@ -25,6 +25,8 @@ __all__ = [
     "ooc_cmd_desc",
     "ooc_cmd_edit_ambience",
     "ooc_cmd_lights",
+    "ooc_cmd_link",
+    "ooc_cmd_update",
 ]
 
 
@@ -752,3 +754,43 @@ def ooc_cmd_lights(client, arg):
             pos = client.area.pos_dark
         c.send_command("BN", bg, pos)
     client.send_ooc(f"This area is {stat} dark.")
+
+
+def ooc_cmd_link(client, arg):
+    """
+    Show a requested HTML link or a list of links.
+    Usage: /link [choice]
+    """
+    links_list = client.server.misc_data['links']
+
+    if links_list is None:
+        raise ClientError('miscdata.yaml is empty. Tell a mod.')
+    
+    if len(arg) == 0:
+        msg = 'Links available (use /link <option>):\n'
+        msg += "\n".join(links_list)
+        client.send_ooc(msg)
+    else:
+        arg = arg.lower()
+        choice = arg.capitalize()
+        if arg in links_list:
+            try:
+                if arg == 'update':
+                    client.send_ooc(f"Latest Update: {links_list[arg]}")
+                else:
+                    client.send_ooc(f"{choice}: {links_list[arg]}")
+                    database.log_area("link.request", client, client.area, message=arg)
+            except:
+                raise ClientError('Link has not been set!')
+        else:
+            raise ArgumentError('Link not found. Use /link to see possible choices.')
+        
+def ooc_cmd_update(client, arg):
+    """
+    See the link to the latest update.
+    Usage: /update
+    """
+    try:
+        client.send_ooc('Latest Update: {}'.format(client.server.misc_data['links']['update']))
+    except:
+        raise ClientError('Update not set!')
