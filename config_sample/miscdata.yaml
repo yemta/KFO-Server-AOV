@@ -1,3 +1,11 @@
+# Links
 links:
     thread: http://aovidya.pw
-    update: http://aovidya.pw
+    update: http://aovidya.pw/downloads
+
+# Titles for advert webhook
+advert_titles:
+    - A Case Is Being Advertised!
+    - Babe wake up new case just dropped.
+    - Can't Escape From Casing Fate!
+    - Rev up that case document!

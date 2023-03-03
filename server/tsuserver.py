@@ -106,7 +106,6 @@ class TsuServer3:
             self.load_ipranges()
             self.load_gimps()
             self.load_miscdata()
-            self.save_miscdata()
             self.hub_manager = HubManager(self)
         except yaml.YAMLError as exc:
             print("There was a syntax error parsing a configuration file:")
@@ -363,11 +362,20 @@ class TsuServer3:
                 self.misc_data = yaml.safe_load(miscdata)
         except Exception:
             logger.debug("Cannot find data file.")
+        
+        if "links" not in self.misc_data:
+            self.misc_data["links"] = {
+                "thread": "http://aovidya.pw",
+                "update": "http://aovidya.pw/downloads",
+            }
 
     def save_miscdata(self):
         """Save misc data to file."""
-        with open('config/miscdata.yaml', 'w') as miscdata:
-            yaml.dump(self.misc_data, miscdata, indent=4)
+        try:
+            with open('config/miscdata.yaml', 'w') as miscdata:
+                yaml.dump(self.misc_data, miscdata, indent=4)
+        except Exception:
+            logger.debug("Cannot find data file.")
 
     def load_music_list(self):
         with open("config/music.yaml", "r", encoding="utf-8") as music:
