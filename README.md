@@ -4,8 +4,6 @@
 
 KFO-Server is the official Python-based server for Attorney Online, forked from tsuserver3.
 
-Forked and modified for AOV specifics.
-
 ## Commands
 
 Documentation: ["Commands"](https://github.com/Crystalwarrior/KFO-Server/blob/master/docs/commands.md). You may also use the /help documentation on the server.
