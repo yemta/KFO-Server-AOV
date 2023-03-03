@@ -25,6 +25,7 @@ __all__ = [
     "ooc_cmd_blockwtce",
     "ooc_cmd_unblockwtce",
     "ooc_cmd_judgelog",
+    "ooc_cmd_evidlog",
     "ooc_cmd_afk",  # Not strictly casing - to be reorganized
     "ooc_cmd_remote_listen",  # Not strictly casing - to be reorganized
     "ooc_cmd_testimony",
@@ -560,6 +561,25 @@ def ooc_cmd_judgelog(client, arg):
     else:
         raise ServerError(
             "There have been no judge actions in this area since start of session."
+        )
+    
+@mod_only()
+def ooc_cmd_evidlog(client, arg):
+    """
+    List the last 10 edits of evidence in the current area.
+    Usage: /evidlog
+    """
+    if len(arg) != 0:
+        raise ArgumentError("This command does not take any arguments.")
+    elog = client.area.evidlog
+    if len(elog) > 0:
+        elog_msg = "== Evidence Log =="
+        for x in elog:
+            elog_msg += f"\r\n{x}"
+        client.send_ooc(elog_msg)
+    else:
+        raise ServerError(
+            "There have been no evidence actions in this area since start of session."
         )
 
 

@@ -237,6 +237,7 @@ class Area:
         self.music_looper = None
         self.next_message_time = 0
         self.judgelog = []
+        self.evidlog = []
         self.music = ""
         self.music_player = ""
         self.music_player_ipid = -1
@@ -1682,6 +1683,16 @@ class Area:
         if len(self.judgelog) >= 10:
             self.judgelog = self.judgelog[1:]
         self.judgelog.append(f"{client.char_name} ({client.ip}) {msg}.")
+
+    def add_to_evidlog(self, client, msg):
+        """
+        Append an event to the evidence log (max 10 items).
+        :param client: event origin
+        :param msg: event message
+        """
+        if len(self.evidlog) >= 10:
+            self.evidlog = self.evidlog[1:]
+        self.evidlog.append(f"{client.char_name} ({client.ip}) {msg}.")
 
     def add_music_playing(self, client, name, showname="", autoplay=None):
         """

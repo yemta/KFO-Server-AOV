@@ -99,7 +99,7 @@ class Webhooks:
         
         title_list = self.server.misc_data['advert_titles']
 
-        # Role pings
+        # Role pings hardcoded uh oh
         roles = {}
         for key in ["def", "defense"]:
             roles[key] = "<@&1080312713181409400>"
