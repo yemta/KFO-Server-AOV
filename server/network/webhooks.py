@@ -101,13 +101,13 @@ class Webhooks:
 
         # Role pings hardcoded uh oh
         roles = {}
-        for key in ["def", "defense"]:
+        for key in ["def", "defense", "co", "sup", "support", "bench"]:
             roles[key] = "<@&1080312713181409400>"
-        for key in ["pro", "prosecution"]:
+        for key in ["pro", "prosecution", "co", "sup", "support", "bench"]:
             roles[key] = "<@&1080312912603779122>"
         for key in ["wit", "witness", "det", "detective"]:
             roles[key] = "<@&1080455427587842078>"
-        for key in ["jud", "judge"]:
+        for key in ["jud", "judge", "jooj"]:
             roles[key] = "<@&1080455480985522226>"
         for key in ["steno", "stenographer"]:
             roles[key] = "<@&1080455505455087676>"
@@ -126,7 +126,7 @@ class Webhooks:
         message = f"{random.choice(title_list)}\n"
         message += " ".join(pings)
 
-        description = f"{char} in {area.name} {'needs people for a case!' if msg is None else f'needs {msg}'}"
+        description = f"{char} in **{area.name}** {'needs people for a case!' if msg is None else f'needs {msg}'}"
 
         self.send_webhook(
             username=username,

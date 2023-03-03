@@ -27,6 +27,7 @@ __all__ = [
     "ooc_cmd_judgelog",
     "ooc_cmd_evidlog",
     "ooc_cmd_afk",  # Not strictly casing - to be reorganized
+    "ooc_cmd_format",
     "ooc_cmd_remote_listen",  # Not strictly casing - to be reorganized
     "ooc_cmd_testimony",
     "ooc_cmd_testimony_start",
@@ -586,6 +587,27 @@ def ooc_cmd_evidlog(client, arg):
 def ooc_cmd_afk(client, arg):
     client.server.client_manager.toggle_afk(client)
 
+def ooc_cmd_format(client, arg):
+    '''
+    Prints the available IC markdown for text formatting, including colors, alignment and actions.
+    Usage: /format <option>
+    '''
+    formats = {
+        "colors": "`Green`, ~Red~, |Orange|, 🤷Gray🤷, _Blue_, ºYellowº, №Pink№, √Cyan√",
+        "align": "~~Center, ~>Right align, \\n New line",
+        "action": "\s Shake, \\f Flash, { Slower text, } Faster text"
+    }
+
+    option = ['colors', 'align', 'action']
+
+    if len(arg) == 0:
+        client.send_ooc(f'All IC formatting options:\n{formats["colors"]}\n {formats["align"]}\n {formats["action"]}')
+    else:
+        choice = arg.lower()
+        if choice in option:
+            client.send_ooc(f'{arg.capitalize()} formatting:\n {formats[choice]}')
+        else:
+            client.send_ooc(f'Formatting options include: {option}')
 
 @mod_only(area_owners=True)
 def ooc_cmd_remote_listen(client, arg):
