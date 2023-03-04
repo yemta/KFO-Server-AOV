@@ -182,7 +182,7 @@ def ooc_cmd_roll(client, arg):
     roll, num_dice, chosen_max, _modifiers, Sum = rtd(arg)
 
     client.area.broadcast_ooc(
-        f"{client.showname} rolled {roll} out of {chosen_max}."
+        f"{client.char_name} rolled {roll} out of {chosen_max}."
         + (f"\nThe total sum is {Sum}." if num_dice > 1 else "")
     )
     database.log_area(
@@ -206,7 +206,7 @@ def ooc_cmd_rollp(client, arg):
     )
     for c in client.area.owners:
         c.send_ooc(
-            f"[{client.area.id}]{client.showname} secretly rolled {roll} out of {chosen_max}."
+            f"[{client.area.id}]{client.char_name} secretly rolled {roll} out of {chosen_max}."
         )
 
     database.log_area(
@@ -228,7 +228,7 @@ def ooc_cmd_notecard(client, arg):
             client.send_ooc("No notecard found. Usage: /notecard <message>")
         return
     client.area.cards[client.char_name] = arg
-    client.area.broadcast_ooc("{} wrote a note card.".format(client.showname))
+    client.area.broadcast_ooc("{} wrote a note card.".format(client.char_name))
     database.log_area("notecard", client, client.area)
 
 
@@ -240,7 +240,7 @@ def ooc_cmd_notecard_clear(client, arg):
     """
     client.area.cards.clear()
     client.area.broadcast_ooc(
-        f"[{client.id}] {client.showname} has cleared all the note cards in this area."
+        f"[{client.id}] {client.char_name} has cleared all the note cards in this area."
     )
     database.log_area("notecard_clear", client, client.area)
 

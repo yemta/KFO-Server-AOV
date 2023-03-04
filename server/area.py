@@ -1667,7 +1667,7 @@ class Area:
         self.status = value.upper()
         self.area_manager.send_arup_status()
 
-    def change_doc(self, doc="No document."):
+    def change_doc(self, doc="No document. Find a template at https://aovidya.pw/templates"):
         """
         Set the doc link.
         :param doc: doc link (Default value = 'No document.')
